@@ -149,20 +149,102 @@
     &--head {
         --padding-side: 1.6rem;
 
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         padding-left: var(--padding-side);
         padding-right: var(--padding-side);
         background-color: #d75d03;
+
+        span {
+            font-weight: 600;
+        }
     }
 
     &:hover:not(&--head) {
         text-decoration: underline;
     }
 
-    &--head:hover {
+    &--head:hover &__context--head {
         opacity: 0.8;
     }
 }
 
 .nav-item ~ .nav-item {
     margin-left: 2rem;
+}
+
+// Drop-down menu
+@keyframes dropDownEffect {
+    from {
+        opacity: 0;
+        top: 10%;
+    }
+    to {
+        opacity: 1;
+        top: 100%;
+    }
+}
+
+.menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    background-color: var(--white);
+    border: 0.1rem solid var(--primary);
+    animation: dropDownEffect ease 0.6s;
+
+    list-style: none;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.5rem 1rem;
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__img {
+        max-width: 2.2rem;
+        margin-right: 0.5rem;
+    }
+
+    &__context {
+        text-transform: none;
+        color: #666;
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
+
+    &__icon {
+        color: #999;
+    }
+
+    &:hover {
+        background-color: var(--primary);
+    }
+
+    &:hover &__img {
+        -webkit-filter: grayscale(0) invert(1);
+        filter: grayscale(0) invert(1);
+    }
+
+    &:hover &__context,
+    &:hover &__icon {
+        color: var(--white);
+    }
+}
+
+.nav-item:hover .menu {
+    display: block;
 }
