@@ -3,7 +3,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.fontFamily": "Fira Code, Roboto Mono, monospace",
+        "editor.fontFamily": "Cascadia Code, Fira Code, Roboto Mono, monospace",
         "editor.fontLigatures": true
     },
     "[json]": {
