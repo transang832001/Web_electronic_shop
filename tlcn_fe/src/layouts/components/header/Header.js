@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faBars,
-    faMagnifyingGlass,
-    faCaretRight,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { cx, actions, navItems, menuCate } from './constant';
+import Menu from './components/menu/Menu';
 import { imgLogo } from '~/assets/images';
 
 function Header() {
+    const [dropDown, setDropDown] = useState(false);
+
+    const handleMouseEnter = () => setDropDown(true);
+    const handleMouseLeave = () => setDropDown(false);
+
     return (
         <header className={cx('header')}>
             <div className={cx('grid', 'wide')}>
@@ -51,42 +54,28 @@ function Header() {
             {/* Navigation */}
             <div className={cx('navigation')}>
                 <div className={cx('grid', 'wide')}>
-                    <button className={cx('nav-item', 'nav-item--head')}>
-                        <div className={cx('nav-item__context--head')}>
-                            <FontAwesomeIcon
-                                className={cx('nav-item__icon')}
-                                icon={faBars}
-                            />
-                            <span>Danh mục sản phẩm</span>
-                        </div>
-                        <ul className={cx('menu')}>
-                            {menuCate.map((item, index) => (
-                                <li key={index} className={cx('menu-item')}>
-                                    <div className={cx('menu-item__left')}>
-                                        <img
-                                            className={cx('menu-item__img')}
-                                            src={item.img}
-                                            alt={item.context}
-                                        />
-                                        <span
-                                            className={cx('menu-item__context')}
-                                        >
-                                            {item.context}
-                                        </span>
-                                    </div>
-                                    <FontAwesomeIcon
-                                        className={cx('menu-item__icon')}
-                                        icon={faCaretRight}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
-                    </button>
+                    <span
+                        className={cx('nav-item', 'nav-item--head')}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <FontAwesomeIcon
+                            className={cx('nav-item__icon')}
+                            icon={faBars}
+                        />
+                        <span className={cx('nav-item__context')}>
+                            Danh mục sản phẩm
+                        </span>
+
+                        {dropDown && <Menu items={menuCate} top />}
+                    </span>
 
                     {navItems.map((item, index) => (
-                        <button key={index} className={cx('nav-item')}>
-                            <span>{item}</span>
-                        </button>
+                        <span key={index} className={cx('nav-item')}>
+                            <span className={cx('nav-item__context')}>
+                                {item}
+                            </span>
+                        </span>
                     ))}
                 </div>
             </div>
